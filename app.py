@@ -80,5 +80,46 @@ try:
     respuesta.raise_for_status()
     mostrar_respuesta(respuesta)
 
+    # ==========================
+    # 4. metodo PATCH
+    # ==========================
+    
+    print("\ --- PATCH: Modifica solo ´precio´ ---")
+
+    respuesta = requests.patch(
+        f"{BASE_URL}/1",
+        json={"price": 590000},
+        timeout=10
+
+    )
+
+    respuesta.raise_for_status()
+    mostrar_respuesta(respuesta)
+
+    # ==========================
+    # 5. metodo DELETE    
+    # ==========================
+
+    print("\n---- Eliminara el producto----")
+
+    respuesta = requests.delete(
+        f"{BASE_URL}/1",
+        timeout=10
+    )
+
+    respuesta.raise_for_status()
+    mostrar_respuesta(respuesta)
+
 except requests.exceptions.Timeout:
     print("Error: se agoto el tiempo de espera")
+
+except requests.exceptions.HTTPError as error:
+    print("Error HTTP", error)
+
+except requests.exceptions.ConnectionError:
+    print("Error: no fue posible conectar con la API.")
+
+except requests.exceptions.RequestException as error:
+    print("Error en la solicitud:", error)
+
+#nuevo comentario
